@@ -1,0 +1,6 @@
+{
+    "require": {
+        "yiisoft/yii2-gii": "*",
+        "yiisoft/yii2-debug": " *"
+    }
+}
