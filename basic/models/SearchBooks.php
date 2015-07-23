@@ -15,6 +15,11 @@ class SearchBooks extends Books
     /**
      * @var string
      */
+    public $authorFullName;
+
+    /**
+     * @var string
+     */
     public $authorFirstName;
 
     /**
@@ -30,7 +35,7 @@ class SearchBooks extends Books
         return [
             [['id', 'author_id'], 'integer'],
 //            [['name', 'date_create', 'date_update', 'preview', 'date'], 'safe'],
-            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName'], 'safe'],
+            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName', 'authorFullName'], 'safe'],
         ];
     }
 
@@ -63,15 +68,23 @@ class SearchBooks extends Books
         $sortAttributes = $dataProvider->getSort()->attributes;
         $sortAttributes = array_merge($sortAttributes,
                                                 [
-                                                'authorFirstName' => [
-                                                    'asc' => ['authors.firstname' => SORT_ASC],
-                                                    'desc' => ['authors.firstname' => SORT_DESC],
-                                                    'label' => 'First Name'
-                                                ],
-                                                'authorLastName' => [
-                                                    'asc' => ['authors.lastname' => SORT_ASC],
-                                                    'desc' => ['authors.lastname' => SORT_DESC],
-                                                    'label' => 'Last Name'
+//                                                'authorFirstName' => [
+//                                                    'asc' => ['authors.firstname' => SORT_ASC],
+//                                                    'desc' => ['authors.firstname' => SORT_DESC],
+//                                                    'default' => SORT_ASC,
+//                                                    'label' => 'First Name'
+//                                                ],
+//                                                'authorLastName' => [
+//                                                    'asc' => ['authors.lastname' => SORT_ASC],
+//                                                    'desc' => ['authors.lastname' => SORT_DESC],
+//                                                    'default' => SORT_ASC,
+//                                                    'label' => 'Last Name'
+//                                                ],
+                                                'authorFullName' => [
+                                                    'asc' => ['authors.firstname' => SORT_ASC, 'authors.lastname' => SORT_ASC],
+                                                    'desc' => ['authors.firstname' => SORT_DESC, 'authors.lastname' => SORT_DESC],
+                                                    'default' => SORT_ASC,
+                                                    'label' => 'Author Name'
                                                 ],
                                             ]
             );
@@ -102,8 +115,10 @@ class SearchBooks extends Books
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'authors.firstname', $this->authorFirstName])
-            ->andFilterWhere(['like', 'authors.lastname', $this->authorLastName])
+//            ->andFilterWhere(['like', 'authors.firstname', $this->authorFirstName])
+//            ->andFilterWhere(['like', 'authors.lastname', $this->authorLastName])
+            ->andWhere('authors.firstname LIKE :fullname1 OR authors.lastname LIKE :fullname2', [':fullname1' => '%'.$this->authorFullName.'%', ':fullname2' => '%'.$this->authorFullName.'%'])
+//            ->andFilterWhere(['like', 'authors.firstname', $this->authorFullName])->orFilterWhere()
             ->andFilterWhere(['like', 'preview', $this->preview]);
 
 //        $query->joinWith(['author' => function ($q) {
