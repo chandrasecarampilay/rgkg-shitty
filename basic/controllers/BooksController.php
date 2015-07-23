@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Books;
 use app\models\SearchBooks;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +15,19 @@ use yii\filters\VerbFilter;
  */
 class BooksController extends Controller
 {
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        if (Yii::$app->user->isGuest)
+        {
+            Yii::$app->user->returnUrl = Yii::$app->request->absoluteUrl;
+            $this->redirect( Url::toRoute('site/login', 'http') );
+        } else {
+            return true;
+        }
+    }
     public function behaviors()
     {
         return [
