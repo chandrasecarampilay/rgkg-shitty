@@ -16,6 +16,9 @@ use Yii;
  * @property integer $author_id
  *
  * @property Authors $author
+ * -@property string $authorFullName
+ * -@property string $authorFirstName
+ * -@property string $authorLastName
  */
 class Books extends \yii\db\ActiveRecord
 {
@@ -34,7 +37,8 @@ class Books extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['date_create', 'date_update', 'date'], 'safe'],
+//            [['date_create', 'date_update', 'date'], 'safe'],
+            [['date_create', 'date_update', 'date', 'authorFirstName', 'authorLastName'], 'safe'],
             [['author_id'], 'integer'],
             [['name', 'preview'], 'string', 'max' => 200]
         ];
@@ -47,12 +51,12 @@ class Books extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'date_create' => 'Date Create',
-            'date_update' => 'Date Update',
-            'preview' => 'Preview',
-            'date' => 'Date',
-            'author_id' => 'Author ID',
+            'name' => Yii::t('app', 'Name'),
+            'date_create' => Yii::t('app', 'Date Create'),
+            'date_update' => Yii::t('app', 'Date Update'),
+            'preview' => Yii::t('app', 'Preview'),
+            'date' => Yii::t('app', 'Date'),
+            'author_id' => Yii::t('app', 'Author ID'),
         ];
     }
 
@@ -62,5 +66,32 @@ class Books extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(Authors::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorFullName()
+    {
+        $author = $this->author;
+        return $author->firstname.' '.$author->lastname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorFirstName()
+    {
+        $author = $this->author;
+        return $author->firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorLastName()
+    {
+        $author = $this->author;
+        return $author->lastname;
     }
 }

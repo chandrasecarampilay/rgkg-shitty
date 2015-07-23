@@ -18,23 +18,90 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Books', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?= GridView::widget([
+<!--    --><?/*= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
-            'date_create',
-            'date_update',
             'preview',
+            'author',
+            'date',
+            'date_create',
+//            'date_update',
             // 'date',
             // 'author_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]); */?>
 
+    <?php
+        $config = [
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+//            ['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                'name',
+                'preview',
+//                'author',
+                'date',
+                'date_create',
+//            'date_update',
+                // 'date',
+                // 'author_id',
+
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ];
+
+        ob_start();
+        ob_implicit_flush(false);
+        try {
+            /* @var $widget Widget */
+//            $config['class'] = get_called_class();
+            $config['class'] = GridView::className();
+            $widget = Yii::createObject($config);
+            $out = $widget->run();
+        } catch(\Exception $e) {
+            ob_end_clean();
+            throw $e;
+        }
+
+        $result = ob_get_clean() . $out;
+//        echo $result;
+        $view = $widget->getView();
+//        var_dump($view);
+
+    ?>
+    <?php
+        $result =
+            GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+//            ['class' => 'yii\grid\SerialColumn'],
+
+                    'id',
+                    'name',
+                    'preview',
+//                    'author',
+                    'authorFirstName',
+                    'authorLastName',
+                    'date',
+                    'date_create',
+//            'date_update',
+                    // 'date',
+                    // 'author_id',
+
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]);
+        echo $result;
+
+    ?>
 </div>

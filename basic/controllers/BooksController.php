@@ -28,6 +28,7 @@ class BooksController extends Controller
             return true;
         }
     }
+
     public function behaviors()
     {
         return [
