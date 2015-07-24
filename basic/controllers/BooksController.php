@@ -56,6 +56,18 @@ class BooksController extends Controller
         ]);
     }
 
+    public function actionSearch()
+    {
+        $searchModel = new SearchBooks();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('_search', [
+            'model' => $searchModel,
+//            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
     /**
      * Displays a single Books model.
      * @param integer $id

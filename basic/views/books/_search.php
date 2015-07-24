@@ -15,18 +15,21 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php echo $form->field($model, 'authorFullName') ?>
+    <?php echo $form->field($model, 'name') ?>
+    <?php
+//        echo $form->field($model, 'searchDateCreateFrom')->widget(\yii\yii2-jui\DatePicker::classname(), [
+        echo $form->field($model, 'searchDateCreateFrom')->widget(\yii\jui\DatePicker::classname(), [
+            //'language' => 'ru',
+            'dateFormat' => 'yyyy-MM-dd',
+        ])
+    ?>
+    <?php echo $form->field($model, 'searchDateCreateTo') ?>
 
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'date_create') ?>
-
-    <?= $form->field($model, 'date_update') ?>
-
-    <?= $form->field($model, 'preview') ?>
-
+    <?php //echo $form->field($model, 'id') ?>
+    <?php // echo $form->field($model, 'date_update') ?>
+    <?php // echo $form->field($model, 'preview') ?>
     <?php // echo $form->field($model, 'date') ?>
-
     <?php // echo $form->field($model, 'author_id') ?>
 
     <div class="form-group">

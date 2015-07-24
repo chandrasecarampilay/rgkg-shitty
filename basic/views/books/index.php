@@ -13,72 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="books-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Books', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<!--    --><?/*= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'preview',
-            'author',
-            'date',
-            'date_create',
-//            'date_update',
-            // 'date',
-            // 'author_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); */?>
-
-    <?php
-        $config = [
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-
-                'id',
-                'name',
-                'preview',
-//                'author',
-                'date',
-                'date_create',
-//            'date_update',
-                // 'date',
-                // 'author_id',
-
-                ['class' => 'yii\grid\ActionColumn'],
-            ],
-        ];
-
-        ob_start();
-        ob_implicit_flush(false);
-        try {
-            /* @var $widget Widget */
-//            $config['class'] = get_called_class();
-            $config['class'] = GridView::className();
-            $widget = Yii::createObject($config);
-            $out = $widget->run();
-        } catch(\Exception $e) {
-            ob_end_clean();
-            throw $e;
-        }
-
-        $result = ob_get_clean() . $out;
-//        echo $result;
-        $view = $widget->getView();
-//        var_dump($view);
-
-    ?>
-    <?php
+     <?php
         $result =
             GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -88,13 +28,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     'name',
-                    'preview',
+                    [
+                        'attribute' => 'preview',
+                        'format' => ['image'],
+                        'value' => 'preview',
+                    ],
 //                    'author',
 //                    'authorFirstName',
 //                    'authorLastName',
                     'authorFullName',
-                    'date',
-                    'date_create',
+                    [
+                        'attribute' => 'date',
+                        'format' => ['date', 'php:d mm Y'],
+                        'value' => 'date',
+                    ],
+                    [
+                        'attribute' => 'date_create',
+                        'format' => ['date', 'php:d mm Y'],
+                        'value' => 'date_create',
+                    ],
 //            'date_update',
                     // 'date',
                     // 'author_id',

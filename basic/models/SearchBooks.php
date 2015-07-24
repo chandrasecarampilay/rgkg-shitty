@@ -28,6 +28,16 @@ class SearchBooks extends Books
     public $authorLastName;
 
     /**
+     * @var string
+     */
+    public $searchDateCreateFrom;
+
+    /**
+     * @var string
+     */
+    public $searchDateCreateTo;
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -35,7 +45,7 @@ class SearchBooks extends Books
         return [
             [['id', 'author_id'], 'integer'],
 //            [['name', 'date_create', 'date_update', 'preview', 'date'], 'safe'],
-            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName', 'authorFullName'], 'safe'],
+            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName', 'authorFullName', 'searchDateCreateFrom', 'searchDateCreateFrom'], 'safe'],
         ];
     }
 
@@ -63,6 +73,9 @@ class SearchBooks extends Books
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 2,
+            ],
         ]);
 
         $sortAttributes = $dataProvider->getSort()->attributes;
@@ -99,15 +112,8 @@ class SearchBooks extends Books
             return $dataProvider;
         }
 
-        // WTF ?!?
-//        $this->addCondition($query, 'id');
-//        $this->addCondition($query, 'authorFirstName', true);
-//        $this->addCondition($query, 'authorLastName', true);
-//        $this->addCondition($query, 'author_id');
-
-
         $query->andFilterWhere([
-            'id' => $this->id,
+            'books.id' => $this->id,
             'date_create' => $this->date_create,
             'date_update' => $this->date_update,
             'date' => $this->date,
@@ -115,15 +121,8 @@ class SearchBooks extends Books
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-//            ->andFilterWhere(['like', 'authors.firstname', $this->authorFirstName])
-//            ->andFilterWhere(['like', 'authors.lastname', $this->authorLastName])
             ->andWhere('authors.firstname LIKE :fullname1 OR authors.lastname LIKE :fullname2', [':fullname1' => '%'.$this->authorFullName.'%', ':fullname2' => '%'.$this->authorFullName.'%'])
-//            ->andFilterWhere(['like', 'authors.firstname', $this->authorFullName])->orFilterWhere()
             ->andFilterWhere(['like', 'preview', $this->preview]);
-
-//        $query->joinWith(['author' => function ($q) {
-//            $q->where('authors.firstname LIKE "%' . $this->authorFirstName . '%"');
-//        }]);
 
         $query->joinWith('author');
 
