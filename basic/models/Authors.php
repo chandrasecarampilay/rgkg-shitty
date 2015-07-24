@@ -47,6 +47,14 @@ class Authors extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getBooks()

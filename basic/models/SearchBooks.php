@@ -44,8 +44,7 @@ class SearchBooks extends Books
     {
         return [
             [['id', 'author_id'], 'integer'],
-//            [['name', 'date_create', 'date_update', 'preview', 'date'], 'safe'],
-            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName', 'authorFullName', 'searchDateCreateFrom', 'searchDateCreateFrom'], 'safe'],
+            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName', 'authorFullName', 'searchDateCreateFrom', 'searchDateCreateTo'], 'safe'],
         ];
     }
 
@@ -60,16 +59,12 @@ class SearchBooks extends Books
 
     /**
      * Creates data provider instance with search query applied
-     *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
         $query = Books::find();
-//        $query = Books::find()->joinWith('author');
-
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -81,18 +76,6 @@ class SearchBooks extends Books
         $sortAttributes = $dataProvider->getSort()->attributes;
         $sortAttributes = array_merge($sortAttributes,
                                                 [
-//                                                'authorFirstName' => [
-//                                                    'asc' => ['authors.firstname' => SORT_ASC],
-//                                                    'desc' => ['authors.firstname' => SORT_DESC],
-//                                                    'default' => SORT_ASC,
-//                                                    'label' => 'First Name'
-//                                                ],
-//                                                'authorLastName' => [
-//                                                    'asc' => ['authors.lastname' => SORT_ASC],
-//                                                    'desc' => ['authors.lastname' => SORT_DESC],
-//                                                    'default' => SORT_ASC,
-//                                                    'label' => 'Last Name'
-//                                                ],
                                                 'authorFullName' => [
                                                     'asc' => ['authors.firstname' => SORT_ASC, 'authors.lastname' => SORT_ASC],
                                                     'desc' => ['authors.firstname' => SORT_DESC, 'authors.lastname' => SORT_DESC],
@@ -121,8 +104,18 @@ class SearchBooks extends Books
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andWhere('authors.firstname LIKE :fullname1 OR authors.lastname LIKE :fullname2', [':fullname1' => '%'.$this->authorFullName.'%', ':fullname2' => '%'.$this->authorFullName.'%'])
+            ->andFilterWhere(['>=', 'date', $this->searchDateCreateFrom])
+            ->andFilterWhere(['<=', 'date', $this->searchDateCreateTo])
             ->andFilterWhere(['like', 'preview', $this->preview]);
+
+        // Just was curious on how to implement search by a (partial) author's name
+        if (isset($this->authorFullName))
+        {
+            $query->andWhere(
+                'authors.firstname LIKE :fullname1 OR authors.lastname LIKE :fullname2',
+                [':fullname1' => '%'.$this->authorFullName.'%', ':fullname2' => '%'.$this->authorFullName.'%']
+            );
+        }
 
         $query->joinWith('author');
 

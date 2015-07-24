@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SearchBooks */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $authorsArray array */
 
 $this->title = 'Books';
 $this->params['breadcrumbs'][] = $this->title;
@@ -13,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="books-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel, 'authorsArray' => $authorsArray,]); ?>
 
     <p>
         <?= Html::a('Create Books', ['create'], ['class' => 'btn btn-success']) ?>
@@ -22,10 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         $result =
             GridView::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+//                'filterModel' => $searchModel,
                 'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
-
                     'id',
                     'name',
                     [
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'authorFullName',
                     [
                         'attribute' => 'date',
-                        'format' => ['date', 'php:d mm Y'],
+                        'format' => ['date', 'php:Y'],
                         'value' => 'date',
                     ],
                     [

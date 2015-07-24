@@ -13,6 +13,11 @@ use app\models\Authors;
 class SearchAuthors extends Authors
 {
     /**
+     * @var string
+     */
+    public $fullName;
+
+    /**
      * @inheritdoc
      */
     public function rules()

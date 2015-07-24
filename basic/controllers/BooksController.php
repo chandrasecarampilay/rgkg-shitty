@@ -49,23 +49,16 @@ class BooksController extends Controller
     {
         $searchModel = new SearchBooks();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $authorsArray = \yii\helpers\ArrayHelper::map(   \app\models\Authors::find()->all(),
+            'id',
+            'fullName'
+        );
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'authorsArray' => $authorsArray,
         ]);
-    }
-
-    public function actionSearch()
-    {
-        $searchModel = new SearchBooks();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('_search', [
-            'model' => $searchModel,
-//            'dataProvider' => $dataProvider,
-        ]);
-
     }
 
     /**
@@ -92,8 +85,14 @@ class BooksController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $authorsArray = \yii\helpers\ArrayHelper::map(   \app\models\Authors::find()->all(),
+                'id',
+                'fullName'
+            );
+
             return $this->render('create', [
                 'model' => $model,
+                'authorsArray' => $authorsArray,
             ]);
         }
     }
@@ -111,8 +110,14 @@ class BooksController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $authorsArray = \yii\helpers\ArrayHelper::map(   \app\models\Authors::find()->all(),
+                'id',
+                'fullName'
+            );
+
             return $this->render('update', [
                 'model' => $model,
+                'authorsArray' => $authorsArray,
             ]);
         }
     }

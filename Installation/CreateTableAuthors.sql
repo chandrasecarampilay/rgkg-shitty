@@ -2,12 +2,12 @@ use `yii2basic`;
 
 DROP TABLE  IF EXISTS `authors`;
 CREATE TABLE `authors` (
-  `id` INT(9) NOT NULL PRIMARY KEY,
+  `id` INT(9) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `firstname` CHAR(30) NOT NULL,
   `lastname`  CHAR(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('–î–∏–Ω', '–ö—É–Ω—Ü');
-INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('–ü–∞–≤–µ–ª', '–°–∞–Ω–∞–µ–≤');
-INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('–ë–∏–ª–ª', '–ì–µ–π—Ç—Å');
-
+INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('Ñ®≠', 'ä„≠Ê');
+INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('è†¢•´', 'ë†≠†•¢');
+INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('Å®´´', 'É•©‚·');
+INSERT INTO `authors` (`firstname`, `lastname`) VALUES ('Ray', 'Bradbury');
