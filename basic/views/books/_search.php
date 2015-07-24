@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\SearchBooks */
@@ -19,12 +20,17 @@ use yii\widgets\ActiveForm;
     <?php echo $form->field($model, 'name') ?>
     <?php
 //        echo $form->field($model, 'searchDateCreateFrom')->widget(\yii\yii2-jui\DatePicker::classname(), [
-        echo $form->field($model, 'searchDateCreateFrom')->widget(\yii\jui\DatePicker::classname(), [
+        echo $form->field($model, 'searchDateCreateFrom')->widget(DatePicker::classname(), [
             //'language' => 'ru',
             'dateFormat' => 'yyyy-MM-dd',
         ])
     ?>
-    <?php echo $form->field($model, 'searchDateCreateTo') ?>
+    <?php
+        echo $form->field($model, 'searchDateCreateTo')->widget(DatePicker::classname(), [
+            //'language' => 'ru',
+            'dateFormat' => 'yyyy-MM-dd',
+        ])
+    ?>
 
     <?php //echo $form->field($model, 'id') ?>
     <?php // echo $form->field($model, 'date_update') ?>
