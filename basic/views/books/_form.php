@@ -14,12 +14,12 @@ use \yii\jui\DatePicker;
 
     <?php // $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
     <?php
-        $form = ActiveForm::begin([
-                'enableClientValidation' => false,
-                'options' => [
-                    'enctype' => 'multipart/form-data',
-                ],
-        ]);
+//        $form = ActiveForm::begin([
+//                'enableClientValidation' => false,
+//                'options' => [
+//                    'enctype' => 'multipart/form-data',
+//                ],
+//        ]);
     ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -30,6 +30,11 @@ use \yii\jui\DatePicker;
 //            ->widget(FileInput::classname(), [
 //                'options' => ['accept' => 'image/*'],
 //            ]);
+
+    ?>
+
+    <?php
+        echo $form->field($model, 'preview')
 
     ?>
 
