@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use himiklab\thumbnail\EasyThumbnailImage;
 
 /**
  * This is the model class for table "books".
@@ -85,6 +86,11 @@ class Books extends \yii\db\ActiveRecord
         return $this->hasOne(Authors::className(), ['id' => 'author_id']);
     }
 
+    public function getImageFile()
+    {
+//        return $this->hasOne()
+    }
+
     /**
      * @return string
      */
@@ -121,5 +127,18 @@ class Books extends \yii\db\ActiveRecord
     {
         $url = Url::to(['/file', 'id' => $this->file_id]);
         return $url;
+    }
+
+    public function getThumbnail()
+    {
+        $thumbnail = EasyThumbnailImage::thumbnailImg(
+                        $this->pictureFile,
+                        50,
+                        50,
+                        EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                        ['alt' => $this->pictureName]
+                    );
+
+        return $thumbnail;
     }
 }

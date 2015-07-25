@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use himiklab\thumbnail\EasyThumbnailImage;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SearchBooks */
@@ -32,6 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'preview',
                         'format' => ['image'],
                         'value' => 'preview',
+                    ],
+                    [
+                        'attribute' => 'thumbnail',
+                        'format' => ['raw']
                     ],
 //                    'author',
 //                    'authorFirstName',
