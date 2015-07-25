@@ -112,6 +112,10 @@ class Books extends \yii\db\ActiveRecord
 
     public function getThumbnail()
     {
-        return '';
+//        return '';
+        $file = $this->file;
+        $name = print_r($file, true);
+        $fname = $file->filename;
+        return $fname;
     }
 }

@@ -28,12 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id',
                 'name',
                 [
-                    'attribute' => 'preview',
-                    'format' => ['image'],
-                    'value' => 'preview',
-                ],
-                [
-                    'attribute' => 'thumbnail',
+//                    'attribute' => 'file.filename',
+                    'attribute' => 'file.thumbnail',
                     'format' => ['raw']
                 ],
                 'authorFullName',
