@@ -18,7 +18,11 @@
     "yiisoft/yii2": ">=2.0.4",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
-    "yii-dream-team/yii2-upload-behavior": "*"
+    "yii-dream-team/yii2-upload-behavior": "*",
+    "2amigos/yii2-file-upload-widget": "~1.0",
+    "vova07/yii2-fileapi-widget": "*",
+    "mdmsoft/yii2-upload-file": "1.2",
+    "nemmo/yii2-attachments": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
