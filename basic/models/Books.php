@@ -3,9 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use himiklab\thumbnail\EasyThumbnailImage;
 
 /**
  * This is the model class for table "books".
@@ -20,9 +17,7 @@ use himiklab\thumbnail\EasyThumbnailImage;
  * @property integer $file_id
  *
  * @property Authors $author
- * -@property string $authorFullName
- * -@property string $authorFirstName
- * -@property string $authorLastName
+ * @property UploadedFiles $file
  */
 class Books extends \yii\db\ActiveRecord
 {
@@ -34,19 +29,23 @@ class Books extends \yii\db\ActiveRecord
         return 'books';
     }
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
-        [
-            'class' => 'mdm\upload\UploadBehavior',
-            'attribute' => 'file', // required, use to receive input file
-            'savedAttribute' => 'file_id', // optional, use to link model with saved file.
-//            'uploadPath' => '@common/upload', // saved directory. default to '@runtime/upload'
-            'autoSave' => true, // when true then uploaded file will be save before ActiveRecord::save()
-            'autoDelete' => true, // when true then uploaded file will deleted before ActiveRecord::delete()
-        ],
-    ];
-}
+            [
+                'class' => 'mdm\upload\UploadBehavior',
+                'attribute' => 'file', // required, use to receive input file
+                'savedAttribute' => 'file_id', // optional, use to link model with saved file.
+                //'uploadPath' => '@common/upload', // saved directory. default to '@runtime/upload'
+                'autoSave' => true, // when true then uploaded file will be save before ActiveRecord::save()
+                'autoDelete' => true, // when true then uploaded file will deleted before ActiveRecord::delete()
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -55,10 +54,9 @@ class Books extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
 //            [['date_create', 'date_update', 'date'], 'safe'],
-            [['date_create', 'date_update', 'date', 'authorFirstName', 'authorLastName'], 'safe'],
-            [['author_id'], 'integer'],
-//            [['name', 'preview'], 'string', 'max' => 200],
-            [['name'], 'string', 'max' => 200],
+            [['date_create', 'date_update', 'date', 'authorFirstName', 'authorLastName', 'authorFullName'], 'safe'],
+            [['author_id', 'file_id'], 'integer'],
+            [['name', 'preview'], 'string', 'max' => 200]
         ];
     }
 
@@ -68,13 +66,17 @@ class Books extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'date_create' => Yii::t('app', 'Date Create'),
             'date_update' => Yii::t('app', 'Date Update'),
             'preview' => Yii::t('app', 'Preview'),
             'date' => Yii::t('app', 'Date'),
             'author_id' => Yii::t('app', 'Author ID'),
+            'file_id' => Yii::t('app', 'File ID'),
+//            'authorFirstName' => Yii::t('app', 'authorFirstName'),
+//            'authorLastName' => Yii::t('app', 'authorLastName'),
+            'authorFullName' => Yii::t('app', 'authorFullName'),
         ];
     }
 
@@ -86,9 +88,12 @@ class Books extends \yii\db\ActiveRecord
         return $this->hasOne(Authors::className(), ['id' => 'author_id']);
     }
 
-    public function getImageFile()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFile()
     {
-//        return $this->hasOne()
+        return $this->hasOne(UploadedFiles::className(), ['id' => 'file_id']);
     }
 
     /**
@@ -96,49 +101,17 @@ class Books extends \yii\db\ActiveRecord
      */
     public function getAuthorFullName()
     {
-        $author = $this->author;
-        return $author->firstname.' '.$author->lastname;
+        return $this->author->fullname;
     }
 
     /**
-     * @return string
+     * TODO:
+     * Thumbnail
+     * Image
      */
-    public function getAuthorFirstName()
-    {
-        $author = $this->author;
-        return $author->firstname;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthorLastName()
-    {
-        $author = $this->author;
-        return $author->lastname;
-    }
-
-    public function getPreviewImg()
-    {
-        return Html::img(['/file', 'id' => $this->file_id]);
-    }
-
-    public function getPreviewURL()
-    {
-        $url = Url::to(['/file', 'id' => $this->file_id]);
-        return $url;
-    }
 
     public function getThumbnail()
     {
-        $thumbnail = EasyThumbnailImage::thumbnailImg(
-                        $this->pictureFile,
-                        50,
-                        50,
-                        EasyThumbnailImage::THUMBNAIL_OUTBOUND,
-                        ['alt' => $this->pictureName]
-                    );
-
-        return $thumbnail;
+        return '';
     }
 }

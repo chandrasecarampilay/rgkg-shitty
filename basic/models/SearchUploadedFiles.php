@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Authors;
+use app\models\UploadedFiles;
 
 /**
- * SearchAuthors represents the model behind the search form about `app\models\Authors`.
+ * SearchUploadedFiles represents the model behind the search form about `app\models\UploadedFiles`.
  */
-class SearchAuthors extends Authors
+class SearchUploadedFiles extends UploadedFiles
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class SearchAuthors extends Authors
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['firstname', 'lastname'], 'safe'],
+            [['id', 'size'], 'integer'],
+            [['name', 'filename', 'type'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class SearchAuthors extends Authors
      */
     public function search($params)
     {
-        $query = Authors::find();
+        $query = UploadedFiles::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,10 +57,12 @@ class SearchAuthors extends Authors
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'size' => $this->size,
         ]);
 
-        $query->andFilterWhere(['like', 'firstname', $this->firstname])
-            ->andFilterWhere(['like', 'lastname', $this->lastname]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'filename', $this->filename])
+            ->andFilterWhere(['like', 'type', $this->type]);
 
         return $dataProvider;
     }

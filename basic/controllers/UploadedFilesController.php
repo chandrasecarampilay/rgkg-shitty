@@ -3,43 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Books;
-use app\models\SearchBooks;
-use yii\helpers\Url;
+use app\models\UploadedFiles;
+use app\models\SearchUploadedFiles;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BooksController implements the CRUD actions for Books model.
+ * UploadedFilesController implements the CRUD actions for UploadedFiles model.
  */
-class BooksController extends Controller
+class UploadedFilesController extends Controller
 {
-    private function getAuthorsArray()
-    {
-        return $authorsArray = \yii\helpers\ArrayHelper::map(   \app\models\Authors::find()->all(), 'id', 'fullName' );
-    }
-
-    /**
-     * Ensures only Authenticated Users would be able to use actions
-     * @param \yii\base\Action $action
-     * @return bool
-     * @throws \yii\web\BadRequestHttpException
-     */
-    public function beforeAction($action)
-    {
-        if (!parent::beforeAction($action)) {
-            return false;
-        }
-        if (Yii::$app->user->isGuest)
-        {
-            Yii::$app->user->returnUrl = Yii::$app->request->absoluteUrl;
-            $this->redirect( Url::toRoute('site/login', 'http') );
-        } else {
-            return true;
-        }
-    }
-
     public function behaviors()
     {
         return [
@@ -53,23 +27,22 @@ class BooksController extends Controller
     }
 
     /**
-     * Lists all Books models.
+     * Lists all UploadedFiles models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SearchBooks();
+        $searchModel = new SearchUploadedFiles();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'authorsArray' => $this->getAuthorsArray(),
         ]);
     }
 
     /**
-     * Displays a single Books model.
+     * Displays a single UploadedFiles model.
      * @param integer $id
      * @return mixed
      */
@@ -81,26 +54,25 @@ class BooksController extends Controller
     }
 
     /**
-     * Creates a new Books model.
+     * Creates a new UploadedFiles model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Books();
+        $model = new UploadedFiles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'authorsArray' => $this->getAuthorsArray(),
             ]);
         }
     }
 
     /**
-     * Updates an existing Books model.
+     * Updates an existing UploadedFiles model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -114,13 +86,12 @@ class BooksController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'authorsArray' => $this->getAuthorsArray(),
             ]);
         }
     }
 
     /**
-     * Deletes an existing Books model.
+     * Deletes an existing UploadedFiles model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -133,15 +104,15 @@ class BooksController extends Controller
     }
 
     /**
-     * Finds the Books model based on its primary key value.
+     * Finds the UploadedFiles model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Books the loaded model
+     * @return UploadedFiles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Books::findOne($id)) !== null) {
+        if (($model = UploadedFiles::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

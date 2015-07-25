@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Authors */
+/* @var $model app\models\UploadedFiles */
 
-$this->title = Yii::t('app', 'Create Authors');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Authors'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Uploaded Files');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Uploaded Files'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="authors-create">
+<div class="uploaded-files-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

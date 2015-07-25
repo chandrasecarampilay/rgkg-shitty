@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SearchAuthors */
+/* @var $model app\models\SearchUploadedFiles */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="authors-search">
+<div class="uploaded-files-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,9 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'firstname') ?>
+    <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'lastname') ?>
+    <?= $form->field($model, 'filename') ?>
+
+    <?= $form->field($model, 'size') ?>
+
+    <?= $form->field($model, 'type') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

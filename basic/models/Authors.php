@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $firstname
  * @property string $lastname
+ * @property string $fullname
  *
  * @property Books[] $books
  */
@@ -40,18 +41,10 @@ class Authors extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'firstname' => 'Firstname',
-            'lastname' => 'Lastname',
+            'id' => Yii::t('app', 'ID'),
+            'firstname' => Yii::t('app', 'Firstname'),
+            'lastname' => Yii::t('app', 'Lastname'),
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->firstname.' '.$this->lastname;
     }
 
     /**
@@ -62,5 +55,12 @@ class Authors extends \yii\db\ActiveRecord
         return $this->hasMany(Books::className(), ['author_id' => 'id']);
     }
 
-//    public function __toString() { return $this->firstname . ' ' . $this->lastname; }
+    /**
+     * @return string
+     */
+    public function getFullname()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
+
 }

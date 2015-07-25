@@ -20,16 +20,6 @@ class SearchBooks extends Books
     /**
      * @var string
      */
-    public $authorFirstName;
-
-    /**
-     * @var string
-     */
-    public $authorLastName;
-
-    /**
-     * @var string
-     */
     public $searchDateCreateFrom;
 
     /**
@@ -43,8 +33,9 @@ class SearchBooks extends Books
     public function rules()
     {
         return [
-            [['id', 'author_id'], 'integer'],
-            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFirstName', 'authorLastName', 'authorFullName', 'searchDateCreateFrom', 'searchDateCreateTo'], 'safe'],
+            [['id', 'author_id', 'file_id'], 'integer'],
+//            [['name', 'date_create', 'date_update', 'preview', 'date'], 'safe'],
+            [['name', 'date_create', 'date_update', 'preview', 'date', 'authorFullName', 'searchDateCreateFrom', 'searchDateCreateTo'], 'safe'],
         ];
     }
 
@@ -59,7 +50,9 @@ class SearchBooks extends Books
 
     /**
      * Creates data provider instance with search query applied
+     *
      * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -75,15 +68,15 @@ class SearchBooks extends Books
 
         $sortAttributes = $dataProvider->getSort()->attributes;
         $sortAttributes = array_merge($sortAttributes,
-                                                [
-                                                'authorFullName' => [
-                                                    'asc' => ['authors.firstname' => SORT_ASC, 'authors.lastname' => SORT_ASC],
-                                                    'desc' => ['authors.firstname' => SORT_DESC, 'authors.lastname' => SORT_DESC],
-                                                    'default' => SORT_ASC,
-                                                    'label' => 'Author Name'
-                                                ],
-                                            ]
-            );
+            [
+                'authorFullName' => [
+                    'asc' => ['authors.firstname' => SORT_ASC, 'authors.lastname' => SORT_ASC],
+                    'desc' => ['authors.firstname' => SORT_DESC, 'authors.lastname' => SORT_DESC],
+                    'default' => SORT_ASC,
+                    'label' => 'Author Name'
+                ],
+            ]
+        );
         $dataProvider->setSort([ 'attributes' => $sortAttributes]);
 
         $this->load($params);
