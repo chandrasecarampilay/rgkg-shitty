@@ -39,4 +39,13 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ),
+  'yii-dream-team/yii2-upload-behavior' => 
+  array (
+    'name' => 'yii-dream-team/yii2-upload-behavior',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@yiidreamteam/upload' => $vendorDir . '/yii-dream-team/yii2-upload-behavior/src',
+    ),
+  ),
 );

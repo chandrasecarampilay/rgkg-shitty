@@ -2,6 +2,7 @@
     "require": {
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-debug": " *",
-        "yiisoft/yii2-jui": "^2.0"
+        "yiisoft/yii2-jui": "^2.0",
+        "yii-dream-team/yii2-upload-behavior": "*"
     }
 }

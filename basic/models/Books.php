@@ -30,6 +30,25 @@ class Books extends \yii\db\ActiveRecord
         return 'books';
     }
 
+    public function behaviors()
+    {
+        $a = new \yiidreamteam\upload\ImageUploadBehavior();
+        return [
+            [
+                'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+//                'attribute' => 'imageUpload',
+                'attribute' => 'preview',
+                'thumbs' => [
+                    'thumb' => ['width' => 400, 'height' => 300],
+                ],
+                'filePath' => '@webroot/images/[[pk]].[[extension]]',
+                'fileUrl' => '/images/[[pk]].[[extension]]',
+                'thumbPath' => '@webroot/images/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '/images/[[profile]]_[[pk]].[[extension]]',
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -40,7 +59,9 @@ class Books extends \yii\db\ActiveRecord
 //            [['date_create', 'date_update', 'date'], 'safe'],
             [['date_create', 'date_update', 'date', 'authorFirstName', 'authorLastName'], 'safe'],
             [['author_id'], 'integer'],
-            [['name', 'preview'], 'string', 'max' => 200]
+//            [['name', 'preview'], 'string', 'max' => 200],
+            [['name'], 'string', 'max' => 200],
+            ['imageUpload', 'file', 'extensions' => 'jpeg, gif, png'],
         ];
     }
 
