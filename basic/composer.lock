@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aa2eccb890e38e3520475f8e99332f42",
+    "hash": "69070a257899e5cd2a175ed4ae486797",
     "packages": [
         {
             "name": "2amigos/yii2-file-upload-widget",
@@ -710,6 +710,49 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "himiklab/yii2-easy-thumbnail-image-helper",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/himiklab/yii2-easy-thumbnail-image-helper.git",
+                "reference": "0013b7ddf9146893cda0e66d4222d433327f8892"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/himiklab/yii2-easy-thumbnail-image-helper/zipball/0013b7ddf9146893cda0e66d4222d433327f8892",
+                "reference": "0013b7ddf9146893cda0e66d4222d433327f8892",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-imagine": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "himiklab\\thumbnail\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HimikLab",
+                    "homepage": "https://github.com/himiklab/"
+                }
+            ],
+            "description": "Yii2 helper for creating and caching thumbnails on real time",
+            "keywords": [
+                "helper",
+                "image",
+                "thumbnail",
+                "yii2"
+            ],
+            "time": "2014-11-13 14:51:48"
         },
         {
             "name": "imagine/imagine",

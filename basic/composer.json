@@ -23,7 +23,8 @@
     "vova07/yii2-fileapi-widget": "*",
     "mdmsoft/yii2-upload-file": "~1.2",
     "nemmo/yii2-attachments": "dev-master",
-    "maxmirazh33/yii2-uploadable-cropable-image": "*"
+    "maxmirazh33/yii2-uploadable-cropable-image": "*",
+    "himiklab/yii2-easy-thumbnail-image-helper": "*"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",

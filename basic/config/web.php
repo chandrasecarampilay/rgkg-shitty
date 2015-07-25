@@ -17,12 +17,16 @@ $config = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     //'basePath' => '@app/messages',
                     //'sourceLanguage' => 'en-US',
-                    'fileMap' => [
-                        'app' => 'app.php',
-                        'app/error' => 'error.php',
-                    ],
+//                    'fileMap' => [
+//                        'app' => 'app.php',
+//                        'app/error' => 'error.php',
+//                    ],
                 ],
             ],
+        ],
+        'thumbnail' => [
+            'class' => 'himiklab\thumbnail\EasyThumbnail',
+            'cacheAlias' => 'assets/gallery_thumbnails',
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
