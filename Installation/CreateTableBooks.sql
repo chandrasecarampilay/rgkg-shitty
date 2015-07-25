@@ -9,12 +9,16 @@ CREATE TABLE `books` (
   `preview`  CHAR(200) DEFAULT NULL,
   `date`  DATE NOT NULL DEFAULT 19700101,           -- the date the book has been published
   `author_id`  int(9),
+  `file_id`    int(11),
   FOREIGN KEY (`author_id`)
     REFERENCES `authors` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  INDEX `name` (`name`)
-
+  INDEX `name` (`name`),
+  FOREIGN KEY (`file_id`)
+    REFERENCES `uploaded_file` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `books` (`name`, `author_id`, `date`) VALUES ('Фантомы', '1', '1983-01-01');

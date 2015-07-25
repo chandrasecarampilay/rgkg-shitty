@@ -41,8 +41,23 @@ $config = [
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],
+    'controllerMap' => [
+        'file' => 'mdm\\upload\\FileController', // use to show or download file
+    ],
     'params' => $params,
 ];
+
+/*
+
+return [
+    ...
+    'controllerMap' => [
+        'file' => 'mdm\\upload\\FileController', // use to show or download file
+    ],
+];
+
+ * */
+
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment

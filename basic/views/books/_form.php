@@ -12,7 +12,7 @@ use \yii\jui\DatePicker;
 
 <div class="books-form">
 
-    <?php // $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
+    <?php  $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
     <?php
 //        $form = ActiveForm::begin([
 //                'enableClientValidation' => false,
@@ -34,9 +34,10 @@ use \yii\jui\DatePicker;
     ?>
 
     <?php
-        echo $form->field($model, 'preview')
+//        echo $form->field($model, 'preview')
 
     ?>
+    <?= $form->field($model,'file')->fileInput(); ?>
 
     <?=
         $form->field($model, 'date')
