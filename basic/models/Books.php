@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "books".
@@ -14,6 +16,7 @@ use Yii;
  * @property string $preview
  * @property string $date
  * @property integer $author_id
+ * @property integer $file_id
  *
  * @property Authors $author
  * -@property string $authorFullName
@@ -107,5 +110,16 @@ class Books extends \yii\db\ActiveRecord
     {
         $author = $this->author;
         return $author->lastname;
+    }
+
+    public function getPreviewImg()
+    {
+        return Html::img(['/file', 'id' => $this->file_id]);
+    }
+
+    public function getPreviewURL()
+    {
+        $url = Url::to(['/file', 'id' => $this->file_id]);
+        return $url;
     }
 }
