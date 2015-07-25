@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Books */
@@ -11,13 +12,27 @@ use yii\widgets\ActiveForm;
 
 <div class="books-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
+    <?php
+//        $form->field($model, 'preview')->fileInput(['name' => 'A', 'value' => 'B'])->label('asfg');
+//        $form->field($model, 'preview')
+//            ->widget(FileInput::classname(), [
+//                'options' => ['accept' => 'image/*'],
+//            ]);
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    ?>
+
+    <?=
+        $form->field($model, 'date')
+                ->widget(DatePicker::classname(),
+                    [
+                        //'language' => 'ru',
+                        'dateFormat' => 'yyyy-MM-dd',
+                    ])
+    ?>
 
     <?php
         echo $form->field($model, 'author_id')
