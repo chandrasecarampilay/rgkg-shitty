@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use himiklab\thumbnail\EasyThumbnailImage;
 
 /**
  * This is the model class for table "uploaded_file".
@@ -60,23 +59,4 @@ class UploadedFiles extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Books::className(), ['file_id' => 'id']);
     }
-
-    public function getThumbnail()
-    {
-        $result = EasyThumbnailImage::thumbnailImg(
-            $this->filename,
-            50,
-            80,
-            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
-            ['alt' => '']
-        );
-
-        return $result;
-    }
 }
-
-/**
- * TODO:
- * Thumbnail
- * Image
- */

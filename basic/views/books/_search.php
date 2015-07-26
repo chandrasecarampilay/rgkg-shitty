@@ -15,6 +15,9 @@ use \yii\jui\DatePicker;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'id' => 'search-book-form'
+        ],
     ]); ?>
     <?php
     echo $form->field($model, 'author_id')

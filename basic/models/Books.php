@@ -2,7 +2,11 @@
 
 namespace app\models;
 
+use app\assets\AppAsset;
 use Yii;
+use himiklab\thumbnail\EasyThumbnailImage;
+use yii\helpers\Html;
+use yii\web\AssetManager;
 
 /**
  * This is the model class for table "books".
@@ -21,6 +25,13 @@ use Yii;
  */
 class Books extends \yii\db\ActiveRecord
 {
+    const THUMBNAIL_HEIGHT = 80;
+    const THUMBNAIL_WIDTH = 50;
+    const THUMBNAIL_CSS_CLASSES = 'thumbnail';
+    const NOIMAGE_CSS_CLASSES = 'noimage';
+    const WEB_IMAGES_NOIMAGE_PLACHOLDER = 'web/images/NoImage.jpg';
+    const BOOKIMAGE_CSS_CLASSES = 'book-image';
+
     /**
      * @inheritdoc
      */
@@ -105,17 +116,58 @@ class Books extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function getAuthorFirstName()
+    {
+        $author = $this->author;
+        return $author->firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorLastName()
+    {
+        $author = $this->author;
+        return $author->lastname;
+    }
+
+    public function getThumbnail()
+    {
+        $options = ['alt' => '', 'class' => self::THUMBNAIL_CSS_CLASSES];
+        if (!isset($this->file))
+        {
+            Html::addCssClass($options, self::NOIMAGE_CSS_CLASSES);
+            $filename = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . self::WEB_IMAGES_NOIMAGE_PLACHOLDER;
+        } else {
+            $filename = $this->file->filename;
+        }
+        $thumbnail = EasyThumbnailImage::thumbnailImg(
+            $filename,
+            self::THUMBNAIL_WIDTH,
+            self::THUMBNAIL_HEIGHT,
+            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+            $options
+        );
+
+        return $thumbnail;
+    }
+
+    public function getImage()
+    {
+        $options = [
+            'class' => self::BOOKIMAGE_CSS_CLASSES,
+            'style' => 'max-height: 350px;',
+        ];
+        $image = Html::img( ['/file', 'id' => $this->file_id], $options );
+        return $image;
+    }
+
+    /**
      * TODO:
      * Thumbnail
      * Image
      */
 
-    public function getThumbnail()
-    {
-//        return '';
-        $file = $this->file;
-        $name = print_r($file, true);
-        $fname = $file->filename;
-        return $fname;
-    }
 }

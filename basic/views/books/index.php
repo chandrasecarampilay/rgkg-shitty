@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use himiklab\thumbnail\EasyThumbnailImage;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SearchBooks */
@@ -11,6 +11,12 @@ use himiklab\thumbnail\EasyThumbnailImage;
 
 $this->title = 'Books';
 $this->params['breadcrumbs'][] = $this->title;
+?>
+
+<?php
+    Pjax::begin([
+//        'linkSelector' => 'a[title="View",data-pjax="0"]',
+    ]);
 ?>
 <div class="books-index">
 
@@ -29,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name',
                 [
 //                    'attribute' => 'file.filename',
-                    'attribute' => 'file.thumbnail',
+//                    'attribute' => 'file.thumbnail',
+                    'attribute' => 'thumbnail',
                     'format' => ['raw']
                 ],
                 'authorFullName',
@@ -43,9 +50,44 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => ['date', 'php:d mm Y'],
                     'value' => 'date_create',
                 ],
-                ['class' => 'yii\grid\ActionColumn'],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{update} {view} {delete}',
+                        'buttons' => [
+                            'update' => function ($url, $model, $key) {
+                                $text = Yii::t('app/actioncolumn-buttons', 'edit');
+                                return Html::a($text, $url, ['title'=>$text, 'aria-label'=>$text]);
+                            },
+                            'view'   => function ($url, $model, $key) {
+                                $text = Yii::t('app/actioncolumn-buttons', 'view');
+//                                return Html::button($text, ['class' => 'showModalButton', 'title' => $text, 'value' => $url, 'aria-label'=>$text]);
+//                                return Html::a($text, '#', ['class' => 'showModalButton', 'title' => $text, 'value' => $url, 'aria-label'=>$text]);
+                                return Html::a($text, false, ['class' => 'showModalButton', 'title' => $text, 'value' => $url, 'aria-label'=>$text]);
+                            },
+                            'delete' => function ($url, $model, $key) {
+                                $text = Yii::t('app/actioncolumn-buttons', 'delete');
+                                return Html::a($text, $url, ['title'=>$text, 'aria-label'=>$text, 'data-method'=>'post', 'data-pjax'=>'0', 'data-confirm'=>'Are you sure you want to delete this item?']);
+                            },
+                        ]
+                ],
             ],
         ]);
     echo $result;
     ?>
+
+    <?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHeader'],
+            'id' => 'modal',
+            'size' => 'modal-lg',
+            //keeps from closing modal with esc key or by clicking out of the modal.
+            // user must click cancel or X to close
+            'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE]
+        ]);
+        echo "<div id='modalContent'></div>";
+//        echo "<div id='modalContent'><div style="text-align:center"><img src="my/path/to/loader.gif"></div></div>";
+        yii\bootstrap\Modal::end();
+    ?>
+
 </div>
+<?php Pjax::end(); ?>

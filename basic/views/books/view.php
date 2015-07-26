@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\models\Books */
 
@@ -10,6 +10,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php Pjax::begin(); ?>
 <div class="books-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -28,16 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            [
+                'attribute' => 'image',
+                'format' => 'raw'
+            ],
             'name',
             'authorFullName',
             [
                 'attribute' => 'date',
                 'format' => ['date', 'php:Y'],
             ],
-            'id',
             'date_create',
-            'date_update',
         ],
     ]) ?>
 
 </div>
+<?php Pjax::end(); ?>
