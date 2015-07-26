@@ -5,7 +5,8 @@ use yii\widgets\ActiveForm;
 use \yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SearchBooks */
+/* @var $model app\models\
+ * SearchBooks */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $authorsArray array */
 ?>
@@ -30,6 +31,7 @@ use \yii\jui\DatePicker;
 
     <?php echo $form->field($model, 'name')->label(Yii::t('app/forms', 'Book Name')) ?>
     <?php
+    echo Html::label(Yii::t('app/forms', 'Book publish date'));
     echo $form->field($model, 'searchDateCreateFrom')
         ->widget(DatePicker::classname(),
             [

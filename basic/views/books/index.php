@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $authorsArray array */
 
-$this->title = 'Books';
+$this->title = Yii::t('app/forms', 'Books');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php  echo $this->render('_search', ['model' => $searchModel, 'authorsArray' => $authorsArray,]); ?>
 
     <p>
-        <?= Html::a('Create Books', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app/forms', 'Create Books'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php
     $result = GridView::widget([
