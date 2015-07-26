@@ -21,19 +21,18 @@ use \yii\jui\DatePicker;
     ]); ?>
     <?php
     echo $form->field($model, 'author_id')
-        ->label('Author Name')
+        ->label(Yii::t('app/forms', 'Author Name'))
         ->dropDownList(
             $authorsArray,
-            ['prompt' => '-Choose an author-']
+            ['prompt' => Yii::t('app/forms', '-Choose an author-')]
         );
     ?>
 
-    <?php echo $form->field($model, 'name')->label('Book Name') ?>
+    <?php echo $form->field($model, 'name')->label(Yii::t('app/forms', 'Book Name')) ?>
     <?php
     echo $form->field($model, 'searchDateCreateFrom')
         ->widget(DatePicker::classname(),
             [
-                //'language' => 'ru',
                 'dateFormat' => 'yyyy-MM-dd',
             ])
     ?>
@@ -41,14 +40,12 @@ use \yii\jui\DatePicker;
     echo $form->field($model, 'searchDateCreateTo')
         ->widget(DatePicker::classname(),
             [
-                //'language' => 'ru',
                 'dateFormat' => 'yyyy-MM-dd',
             ])
     ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

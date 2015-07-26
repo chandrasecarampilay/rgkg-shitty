@@ -85,9 +85,12 @@ class Books extends \yii\db\ActiveRecord
             'date' => Yii::t('app', 'Date'),
             'author_id' => Yii::t('app', 'Author ID'),
             'file_id' => Yii::t('app', 'File ID'),
-//            'authorFirstName' => Yii::t('app', 'authorFirstName'),
-//            'authorLastName' => Yii::t('app', 'authorLastName'),
+            'authorFirstName' => Yii::t('app', 'authorFirstName'),
+            'authorLastName' => Yii::t('app', 'authorLastName'),
             'authorFullName' => Yii::t('app', 'authorFullName'),
+            'image' => Yii::t('app', 'image'),
+            'thumbnail' => Yii::t('app', 'thumbnail'),
+            'file' => Yii::t('app', 'book image'),
         ];
     }
 
@@ -163,11 +166,4 @@ class Books extends \yii\db\ActiveRecord
         $image = Html::img( ['/file', 'id' => $this->file_id], $options );
         return $image;
     }
-
-    /**
-     * TODO:
-     * Thumbnail
-     * Image
-     */
-
 }

@@ -30,6 +30,21 @@ class SearchBooks extends Books
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $ownLabels = [
+            'searchDateCreateFrom' => Yii::t('app', 'Published from'),
+            'searchDateCreateTo' => Yii::t('app', 'Published to'),
+        ];
+
+        return array_merge($labels, $ownLabels);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
