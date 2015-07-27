@@ -118,4 +118,11 @@ class UploadedFilesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionViewAsImage($id)
+    {
+        return $this->renderAjax('viewAsImage', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 }

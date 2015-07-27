@@ -36,6 +36,9 @@ a.asc:after, a.desc:after {
     display: inline-flex;
     padding: 2px 5px 0px;
 }
+.books-search #searchbooks-name {
+    border-radius: 0px;
+}
 
 .books-search button.btn.btn-primary {
     float: right;
@@ -43,16 +46,5 @@ a.asc:after, a.desc:after {
 
 .books-search
 #searchbooks-searchdatecreatefrom, #searchbooks-searchdatecreateto {
-    /*padding: 0px 5px;*/
     margin: 0px 10px 0px 0px;
 }
-
-/*
-a.asc:after {
-    content: "\e155" !important;
-}
-
-a.desc:after {
-    content: "\e156" !important;
-}
-*/

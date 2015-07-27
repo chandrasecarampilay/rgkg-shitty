@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id',
                 'name',
                 [
-                    'attribute' => 'thumbnail',
+//                    'attribute' => 'thumbnail',
+                    'attribute' => 'clickableThumbnail',
                     'format' => ['raw']
                 ],
                 'authorFullName',
@@ -66,19 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
     echo $result;
     ?>
 
-    <?php
-        yii\bootstrap\Modal::begin([
-            'headerOptions' => ['id' => 'modalHeader'],
-            'id' => 'modal',
-            'size' => 'modal-lg',
-            //keeps from closing modal with esc key or by clicking out of the modal.
-            // user must click cancel or X to close
-//            'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE]
-        ]);
-        echo "<div id='modalContent'></div>";
-//        echo "<div id='modalContent'><div style="text-align:center"><img src="my/path/to/loader.gif"></div></div>";
-        yii\bootstrap\Modal::end();
-    ?>
 
 </div>
 <?php Pjax::end(); ?>
