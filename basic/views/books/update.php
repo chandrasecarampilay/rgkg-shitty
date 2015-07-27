@@ -6,11 +6,15 @@ use yii\helpers\Html;
 /* @var $model app\models\Books */
 /* @var $authorsArray array */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Books',
-]) . ' ' . $model->name;
+//$this->title = Yii::t('app', 'Update {modelClass}: ', [
+//    'modelClass' => 'Books',
+//]) . ' ' . $model->name;
+
+$this->title =  $model->name;
+
+
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Books'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/forms', $model->name) , 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="books-update">

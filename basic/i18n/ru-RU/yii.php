@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '(not set)' => '',
+    '(not set)' => '-',
     'An internal server error occurred.' => '',
     'Are you sure you want to delete this item?' => '',
     'Delete' => '',

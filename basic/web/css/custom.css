@@ -1,3 +1,58 @@
 #modalHeader {
     display: none;
 }
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+.grid-view a.asc:after {
+    content: "\e113" !important;
+}
+
+.grid-view a.desc:after {
+    content: "\e114" !important;
+}
+
+.book.date-published.filter .form-group {
+    display: inline-block;
+}
+
+.books-search label[for="searchbooks-author_id"], .books-search label[for="searchbooks-name"] {
+    display: none;
+}
+
+.books-search .form-group.field-searchbooks-author_id,
+.books-search .form-group.field-searchbooks-name {
+    max-width: 350px;
+    display: inline-flex;
+    padding: 2px 5px 0px;
+}
+
+.books-search button.btn.btn-primary {
+    float: right;
+}
+
+.books-search
+#searchbooks-searchdatecreatefrom, #searchbooks-searchdatecreateto {
+    /*padding: 0px 5px;*/
+    margin: 0px 10px 0px 0px;
+}
+
+/*
+a.asc:after {
+    content: "\e155" !important;
+}
+
+a.desc:after {
+    content: "\e156" !important;
+}
+*/

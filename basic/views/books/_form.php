@@ -25,7 +25,7 @@ use \yii\jui\DatePicker;
     ?>
     <?php
         echo $form->field($model, 'author_id')
-            ->label('Author Name')
+            ->label(Yii::t('app/forms', 'Author Name'))
             ->dropDownList(
                 $authorsArray,
                 ['prompt' => '-Choose an author-']
