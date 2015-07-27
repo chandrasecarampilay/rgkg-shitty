@@ -124,7 +124,6 @@ class SearchBooks extends Books
                 [':fullname1' => '%'.$this->authorFullName.'%', ':fullname2' => '%'.$this->authorFullName.'%']
             );
         }
-
         $query->joinWith('author');
 
         return $dataProvider;
