@@ -6,6 +6,7 @@ use app\assets\AppAsset;
 use Yii;
 use himiklab\thumbnail\EasyThumbnailImage;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\AssetManager;
 
 /**
@@ -90,6 +91,7 @@ class Books extends \yii\db\ActiveRecord
             'authorFullName' => Yii::t('app', 'authorFullName'),
             'image' => Yii::t('app', 'image'),
             'thumbnail' => Yii::t('app', 'thumbnail'),
+            'clickableThumbnail' => Yii::t('app', 'thumbnail'),
             'file' => Yii::t('app', 'book image'),
         ];
     }
@@ -156,6 +158,21 @@ class Books extends \yii\db\ActiveRecord
 
         return $thumbnail;
     }
+
+    public function getClickableThumbnail()
+    {
+        $thumbnail = $this->getThumbnail();
+        if(!isset($this->file))
+        {
+            $result = $thumbnail;
+        } else {
+            $url = Url::to(['uploaded-files/view-as-image', 'id' => $this->file_id]);
+            $result = Html::a($thumbnail, $url, ['class' => 'showModalButton', 'title' => '', 'value' => $url, ]);
+        }
+
+        return $result;
+    }
+
 
     public function getImage()
     {

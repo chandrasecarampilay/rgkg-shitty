@@ -15,7 +15,10 @@ use \yii\jui\DatePicker;
     <?php  $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model,'file')->fileInput() ?>
+    <?php echo $model->getClickableThumbnail() ?>
+
     <?=
         $form->field($model, 'date')
             ->widget(DatePicker::classname(),

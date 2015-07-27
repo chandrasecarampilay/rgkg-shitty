@@ -17,10 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Books' => 'Книги',
-    'Create Books' => 'Создать...',
-    '-Choose an author-' => '-Выберите автора-',
+    'Book Name' => '@@Название@@',
+    'Create Books' => '@@Создать...@@',
+    '-Choose an author-' => 'автор',
     'Author Name' => 'Автор',
-    'Book Name' => 'Название',
     'Book publish date' => 'Дата выхода книги: ',
+    'Books' => 'Книги',
 ];

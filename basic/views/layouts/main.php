@@ -49,6 +49,17 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
+        <?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHeader'],
+            'id' => 'modal',
+            'size' => 'modal-lg',
+        ]);
+        echo "<div id='modalContent'></div>";
+        yii\bootstrap\Modal::end();
+        ?>
+
+
         <div class="container">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
